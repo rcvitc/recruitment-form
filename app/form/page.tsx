@@ -195,10 +195,14 @@ function FormContent() {
       <main className="min-h-screen bg-[#00040D] text-white relative z-10">
         <ParticlesCanvas />
         <SiteHeader />
-        <section className="container mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-center min-h-[66vh]">
-          <div className="w-full max-w-3xl sm:max-w-2xl md:max-w-3xl lg:max-w-4xl mx-auto">
+
+        <section className="flex items-center justify-center min-h-[66vh] px-4 sm:px-6 lg:px-8">
+          <div className="w-full max-w-3xl text-center">
             <h1 className="text-3xl font-bold mb-3">Please log in to apply</h1>
-            <p className="text-white/80 mb-6">You need to be signed in to access the application form.</p>
+            <p className="text-white/80 mb-6">
+              You need to be signed in to access the application form.
+            </p>
+
             {/* Show error if present */}
             {errorDetails && (
               <div className="bg-[#fead53]/10 border border-[#fead53] rounded py-3 px-4 text-[#fead53] font-semibold mb-6">
@@ -206,6 +210,7 @@ function FormContent() {
                 <div className="text-sm">{errorDetails.message}</div>
               </div>
             )}
+
             <Link
               href="/login"
               className="inline-block bg-[#fead53] text-[#00040D] px-6 py-2 rounded-md font-semibold hover:bg-[#fdbd74] transition"
