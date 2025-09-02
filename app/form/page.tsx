@@ -49,7 +49,7 @@ function FormContent() {
   const router = useRouter()
   const searchParams = useSearchParams()
   const [sessionChecked, setSessionChecked] = useState(false)
-  const [isLoggedIn, setIsLoggedIn] = useState(false)
+  wconst[isLoggedIn, setIsLoggedIn] = useState(false)
   const [supabaseEmail, setSupabaseEmail] = useState("")
   const [dept1, setDept1] = useState<string | "">("")
   const [dept2, setDept2] = useState<string | "">("")
@@ -79,7 +79,14 @@ function FormContent() {
       if (code) {
         setLoadingText("Completing login...")
         await supabase.auth.getUser()
-        router.replace("/form")
+        const pathSegments = window.location.pathname.split("/").filter(Boolean)
+        if (pathSegments.length === 0) {
+          pathSegments.push("form")
+        } else {
+          pathSegments[pathSegments.length - 1] = "form"
+        }
+        const newPath = "/" + pathSegments.join("/")
+        router.replace(newPath)
         return
       }
       const { data } = await supabase.auth.getUser()

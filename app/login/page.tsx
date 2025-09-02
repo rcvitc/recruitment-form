@@ -20,7 +20,14 @@ export default function LoginPage() {
       const supabase = getBrowserSupabase()
       const { data } = await supabase.auth.getUser()
       if (data?.user) {
-        router.replace("/form")
+        const pathSegments = window.location.pathname.split("/").filter(Boolean)
+        if (pathSegments.length === 0) {
+          pathSegments.push("form")
+        } else {
+          pathSegments[pathSegments.length - 1] = "form"
+        }
+        const newPath = "/" + pathSegments.join("/")
+        router.replace(newPath)
       }
     }
     checkSession()
