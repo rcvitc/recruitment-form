@@ -1,4 +1,4 @@
-name: Next.js Build and Upload Artifacts
+name: Build and Deploy to GitHub Pages
 
 on:
   push:
@@ -7,8 +7,8 @@ on:
   workflow_dispatch:
 
 jobs:
-  build:
-    runs-on: ubuntu-latest 
+  build-and-deploy:
+    runs-on: ubuntu-latest
 
     env:
       NEXT_PUBLIC_SUPABASE_URL: ${{ vars.NEXT_PUBLIC_SUPABASE_URL }}
@@ -30,8 +30,11 @@ jobs:
       - name: Build Next.js
         run: npm run build
 
-      - name: Upload Build Artifact
-        uses: actions/upload-artifact@v4
+      - name: Export Next.js
+        run: npm run export
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v6
         with:
-          name: nextjs-build
-          path: out/
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./out
