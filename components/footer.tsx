@@ -25,7 +25,7 @@ export default function Footer() {
               Phone:{" "}
               <a
                 className="hover:text-[#fead53] transition-colors underline underline-offset-2"
-                href="tel:+919876543210"
+                href="tel:+917702669040"
               >
                 +91 77026 69040
               </a>
