@@ -26,7 +26,7 @@ export function SiteHeader() {
         <img
           alt="Robotics Club Logo"
           className="h-10 w-auto cursor-pointer"
-          src="/logo.png"
+          src="./logo.png"
           onClick={() => window.open("/", "_self")}
         />
       </div>

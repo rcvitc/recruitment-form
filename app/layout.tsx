@@ -6,8 +6,8 @@ export const metadata: Metadata = {
   title: 'Robotics Club',
   description: 'Official Robotics Club website',
   icons: {
-    icon: "/favicon-64x64.png",
-    shortcut: "/logo.png",
+    icon: "./favicon-64x64.png",
+    shortcut: "./logo.png",
   }
 }
 

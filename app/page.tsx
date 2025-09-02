@@ -22,7 +22,7 @@ export default function CombinedPage() {
           <img
             alt="Robotics Club Logo"
             className="h-20 w-auto mb-8"
-            src="/logo.png"
+            src="./logo.png"
           />
           <h1 className="text-4xl md:text-6xl font-bold tracking-tight text-white">
             Build the Future. Join Robotics Club.
