@@ -6,61 +6,68 @@ import { Textarea } from "@/components/ui/textarea"
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
 import { Checkbox } from "@/components/ui/checkbox"
 import { cn } from "@/lib/utils"
-import type { Question } from "@/components/department-selector"
+import type { Question } from "@/lib/departments"
 
 export type AnswerValue = string | string[] | null
 
 export function QuestionRenderer({
   q,
+  question: questionProp,
   value,
   onChange,
 }: {
-  q: Question
+  q?: Question
+  question?: Question
   value: AnswerValue
   onChange: (v: AnswerValue) => void
 }) {
+  const Q = (questionProp || q)!
+
   return (
     <div className="space-y-2 rounded-lg border border-[#0b1320] bg-[#00040D] p-4">
       <div className="flex items-center justify-between">
-        <Label htmlFor={q.id} className="text-white">
-          {q.label} {q.required ? <span className="text-[#FEAD53]">*</span> : null}
+        <Label htmlFor={Q.id} className="text-white">
+          {Q.label}{" "}
+          {Q.required ? (
+            <span className="text-[#FEAD53] font-medium text-2xl leading-none">*</span>
+          ) : null}
         </Label>
-        {q.description ? <span className="text-xs text-white/60">{q.description}</span> : null}
+        {"description" in Q && Q.description ? <span className="text-xs text-white/60">{Q.description}</span> : null}
       </div>
 
-      {q.type === "text" ? (
+      {Q.type === "text" ? (
         <Input
-          id={q.id}
-          placeholder={(q as any).placeholder || ""}
+          id={Q.id}
+          placeholder={("placeholder" in Q && Q.placeholder) || ""}
           value={(value as string) ?? ""}
           onChange={(e) => onChange(e.target.value)}
           className="border-[#0b1320] bg-[#0b1320] text-white placeholder:text-white/40"
         />
-      ) : q.type === "textarea" ? (
+      ) : Q.type === "textarea" ? (
         <Textarea
-          id={q.id}
-          placeholder={(q as any).placeholder || ""}
+          id={Q.id}
+          placeholder={("placeholder" in Q && Q.placeholder) || ""}
           value={(value as string) ?? ""}
           onChange={(e) => onChange(e.target.value)}
           className="border-[#0b1320] bg-[#0b1320] text-white placeholder:text-white/40"
         />
-      ) : q.type === "mcq" ? (
-        <RadioGroup value={(value as string) ?? ""} onValueChange={onChange} className="grid gap-2">
-          {(q as any).options.map((opt: { value: string; label: string }) => (
+      ) : Q.type === "mcq" ? (
+        <RadioGroup value={(value as string) ?? ""} onValueChange={onChange as any} className="grid gap-2">
+          {("options" in Q ? Q.options : []).map((opt: { value: string; label: string }) => (
             <div
               key={opt.value}
               className="flex items-center gap-2 rounded-md border border-[#0b1320] bg-[#0b1320] p-2"
             >
-              <RadioGroupItem id={`${q.id}-${opt.value}`} value={opt.value} />
-              <Label htmlFor={`${q.id}-${opt.value}`} className="text-white">
+              <RadioGroupItem id={`${Q.id}-${opt.value}`} value={opt.value} />
+              <Label htmlFor={`${Q.id}-${opt.value}`} className="text-white">
                 {opt.label}
               </Label>
             </div>
           ))}
         </RadioGroup>
-      ) : q.type === "checkbox" ? (
+      ) : Q.type === "checkbox" ? (
         <div className="grid gap-2">
-          {(q as any).options.map((opt: { value: string; label: string }) => {
+          {("options" in Q ? Q.options : []).map((opt: { value: string; label: string }) => {
             const arr = Array.isArray(value) ? value : []
             const checked = arr.includes(opt.value)
             return (
@@ -77,8 +84,14 @@ export function QuestionRenderer({
                     if (c) onChange([...arr, opt.value])
                     else onChange(arr.filter((v) => v !== opt.value))
                   }}
-                />
-                <span>{opt.label}</span>
+                  className={` 
+                    border-2 border-[#fead53]  
+                    data-[state=checked]:bg-[#fead53]
+                    data-[state=checked]:border-[#fead53]
+                    data-[state=checked]:text-[#00040D]
+                    `}>
+                </Checkbox>
+                <span className="text-white">{opt.label}</span>
               </label>
             )
           })}

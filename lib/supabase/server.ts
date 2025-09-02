@@ -1,32 +1,32 @@
-import { cookies, headers } from "next/headers"
-import { createServerClient } from "@supabase/ssr"
+import { cookies } from "next/headers";
+import { createServerClient } from "@supabase/ssr";
+import { NextResponse } from "next/server";
 
-let _serverClient: ReturnType<typeof createServerClient> | null = null
+let _serverClient: ReturnType<typeof createServerClient> | null = null;
 
-export function getServerSupabase() {
-  if (_serverClient) return _serverClient
-  const cookieStore = cookies()
-  const headerList = headers()
+export async function getServerSupabase() {
+  if (_serverClient) return _serverClient;
+  const cookieStore = await cookies();
+  const response = NextResponse.next();
   _serverClient = createServerClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
     process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
     {
       cookies: {
-        get(name: string) {
-          return cookieStore.get(name)?.value
+        getAll() {
+          return cookieStore.getAll();
         },
-        set(name: string, value: string, options: any) {
-          cookieStore.set({ name, value, ...options })
+        setAll(cookiesToSet) {
+          try {
+            cookiesToSet.forEach(({ name, value, options }) => {
+              response.cookies.set(name, value, options);
+            });
+          } catch {
+            console.log("Something went wrong setting cookies");
+          }
         },
-        remove(name: string, options: any) {
-          cookieStore.set({ name, value: "", ...options })
-        },
-      },
-      headers: {
-        "X-Forwarded-For": headerList.get("x-forwarded-for") ?? undefined,
-        "User-Agent": headerList.get("user-agent") ?? undefined,
       },
     },
-  )
-  return _serverClient
+  );
+  return { supabase: _serverClient, response };
 }
