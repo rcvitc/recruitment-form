@@ -20,7 +20,7 @@ jobs:
     env:
       NEXT_PUBLIC_SUPABASE_URL: ${{ vars.NEXT_PUBLIC_SUPABASE_URL }}
       NEXT_PUBLIC_SUPABASE_ANON_KEY: ${{ vars.NEXT_PUBLIC_SUPABASE_ANON_KEY }}
-      SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -46,6 +46,10 @@ jobs:
         with:
           node-version: "20"
           cache: ${{ steps.detect-package-manager.outputs.manager }}
+      - name: Running some checks
+        run:
+          echo $NEXT_PUBLIC_SUPABASE_URL
+          echo $NEXT_PUBLIC_SUPABASE_ANON_KEY
       - name: Setup Pages
         uses: actions/configure-pages@v5
         with:
