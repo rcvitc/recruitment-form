@@ -265,6 +265,7 @@ function FormContent() {
                     placeholder={q.placeholder}
                     required={q.required}
                     disabled={q.id === "email"}
+                    type={q.type}
                   />
                 </label>
               </div>

@@ -40,7 +40,7 @@ export type PersonalQuestion = {
   label: string;
   placeholder?: string;
   required?: boolean;
-  type?: "text";
+  type?: "text" | "number" | "email";
 };
 
 export const personalQuestions: PersonalQuestion[] = [
@@ -68,14 +68,14 @@ export const personalQuestions: PersonalQuestion[] = [
   },
   {
     id: "email",
-    type: "text",
+    type: "email",
     label: "Email",
     placeholder: "someone@rcvitc.com",
     required: true,
   },
   {
     id: "phone",
-    type: "text",
+    type: "number",
     label: "Phone Number",
     placeholder: "xxxxxxxxxx",
     required: true,
