@@ -1,5 +1,9 @@
 import { Github, Instagram, Linkedin } from "lucide-react";
 
+const contacts = {
+  "Samanyu": "9188781844",
+};
+
 export default function Footer() {
   return (
     <footer className="border-t border-[#0b1320] bg-[#00040D] w-full">
@@ -21,15 +25,19 @@ export default function Footer() {
                 contact@rcvitc.com
               </a>
             </p>
-            <p className="text-gray-400">
-              Phone:{" "}
-              <a
-                className="hover:text-[#fead53] transition-colors underline underline-offset-2"
-                href="tel:+917702669040"
-              >
-                +91 77026 69040
-              </a>
-            </p>
+            <div>
+              {Object.entries(contacts).map(([name, phone]) => (
+                <p key={name} className="text-gray-400 py-2">
+                  {name}:{" "}
+                  <a
+                    className="hover:text-[#fead53] transition-colors underline underline-offset-2"
+                    href={`tel:+${phone}`}
+                  >
+                    +{phone}
+                  </a>
+                </p>
+              ))}
+            </div>
           </div>
 
           {/* Quick Links */}

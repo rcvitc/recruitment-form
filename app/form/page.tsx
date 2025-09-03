@@ -320,6 +320,17 @@ function FormContent() {
                     return
                   }
                 }
+                for (const deptKey of selectedDepts) {
+                  const department = departments.find(d => d.key === deptKey);
+                  if (!department) continue;
+                  const requiredDeptQuestions = department.questions.filter(q => q.required);
+                  for (const question of requiredDeptQuestions) {
+                    if (!answers[deptKey]?.[question.id]) {
+                      alert(`Please answer all required questions for the "${department.name}" department.`);
+                      return;
+                    }
+                  }
+                }
                 setReviewPayload({ ...payload, departments: departments.filter(item => item.key in payload.answers) })
                 setConfirmOpen(true)
               }}
