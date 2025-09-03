@@ -10,7 +10,7 @@ export default function Footer() {
             <img
               alt="Robotics Club Logo"
               className="h-12 w-auto mb-4"
-              src="/logo.png"
+              src="./logo.png"
             />
             <p className="text-gray-400 mt-2">
               Email:{" "}
@@ -25,7 +25,7 @@ export default function Footer() {
               Phone:{" "}
               <a
                 className="hover:text-[#fead53] transition-colors underline underline-offset-2"
-                href="tel:+919876543210"
+                href="tel:+917702669040"
               >
                 +91 77026 69040
               </a>
