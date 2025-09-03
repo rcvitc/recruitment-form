@@ -49,7 +49,7 @@ function FormContent() {
   const router = useRouter()
   const searchParams = useSearchParams()
   const [sessionChecked, setSessionChecked] = useState(false)
-  wconst[isLoggedIn, setIsLoggedIn] = useState(false)
+  const [isLoggedIn, setIsLoggedIn] = useState(false)
   const [supabaseEmail, setSupabaseEmail] = useState("")
   const [dept1, setDept1] = useState<string | "">("")
   const [dept2, setDept2] = useState<string | "">("")
