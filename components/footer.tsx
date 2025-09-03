@@ -1,8 +1,8 @@
 import { Github, Instagram, Linkedin } from "lucide-react";
 
 const contacts = {
-  "Samanyu": "9188781844",
-  "Maaz Alam": "8851085814",
+  "Samanyu": "919188781844",
+  "Maaz Alam": "918851085814",
 };
 
 export default function Footer() {
