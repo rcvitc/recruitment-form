@@ -266,6 +266,7 @@ function FormContent() {
                     required={q.required}
                     disabled={q.id === "email"}
                     type={q.type}
+                    {...(q.type === "number" && { pattern: "[0-9]*" })}
                   />
                 </label>
               </div>
