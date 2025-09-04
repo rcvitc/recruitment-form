@@ -1,7 +1,7 @@
 import { Github, Instagram, Linkedin } from "lucide-react";
 
 const contacts = {
-  "Samanyu": "919188781844",
+  "Samanyu Gupta": "919188781844",
   "Maaz Alam": "918851085814",
 };
 
