@@ -95,7 +95,7 @@ export default function LoginPage() {
             <input
               id="email"
               type="email"
-              placeholder="Enter your email"
+              placeholder="Enter your VIT Student email ID"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               className="w-full px-4 py-3 rounded-md bg-white/5 border border-white/10 text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-[#fead53]"
